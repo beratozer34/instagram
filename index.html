@@ -15,7 +15,6 @@
         /* CSS ile Kırılmayan Yazı Logosu */
         .insta-text-logo { font-family: 'Georgia', 'Times New Roman', serif; font-size: 38px; font-weight: 500; margin: 22px 0 35px 0; font-style: italic; color: #262626; }
         
-        /* Form Elemanları Garanti Altında */
         .login-form { display: flex; flex-direction: column; width: 100%; }
         .input-wrapper { position: relative; margin-bottom: 6px; width: 100%; }
         .input-box { width: 100%; padding: 10px 8px; background: #fafafa; border: 1px solid #dbdbdb; border-radius: 3px; font-size: 12px; outline: none; color: #262626; }
@@ -30,7 +29,6 @@
         .pfp-wrapper { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin-right: 100px; border: 1px solid #dbdbdb; flex-shrink: 0; }
         .pfp-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .profile-info h1 { font-size: 28px; font-weight: 300; margin-bottom: 20px; display: inline-block; }
-        .verified-badge { color: #0095f6; font-size: 20px; margin-left: 8px; vertical-align: middle; }
         .stats { display: flex; gap: 40px; margin-bottom: 20px; font-size: 16px; }
         .stats span { font-weight: bold; }
         .stats li { list-style: none; }
@@ -54,6 +52,7 @@
 </head>
 <body>
 
+    <!-- 🔐 GİRİŞ PANELİ -->
     <div id="loginWrapper" class="login-wrapper">
         <div class="login-container">
             <div class="insta-text-logo">Instagram</div>
@@ -72,37 +71,43 @@
         </div>
     </div>
 
+    <!-- 🌐 KİLİTLİ PROFİL EKRANI -->
     <div id="profileBox" class="profile-container">
         <div class="profile-header">
             <div class="pfp-wrapper">
                 <img src="berat.jpg" alt="Profil Resmi">
             </div>
             <div class="profile-info">
-                <h1>beratozer <span class="verified-badge">✓</span></h1>
+                <!-- Mavi tik tamamen uçuruldu kanka -->
+                <h1>beratozer</h1>
                 <ul class="stats">
                     <li><span>3</span> gönderi</li>
-                    <li><span>4.218</span> takipçi</li>
-                    <li><span>312</span> takip</li>
+                    <li><span>31331</span> takipçi</li>
+                    <li><span>1</span> takip</li>
                 </ul>
                 <div class="bio">
                     Berat Özer
-                    <p style="font-weight: 400; margin-top: 4px;">Software Engineer | System Analyst 🛠️</p>
+                    <p style="font-weight: 400; margin-top: 4px;">Computer Engineer</p>
                     <span>📍 Istanbul, Alibeyköy</span>
                 </div>
             </div>
         </div>
 
+        <!-- 3 Adet Tamamen Sana Bırakılan Post Havuzu -->
         <div class="posts-grid">
+            <!-- Sol Post -->
             <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1527838832700-50592524df75?q=80&w=600&auto=format&fit=cover" alt="Istanbul">
+                <img src="soll.jpg" alt="Sol Gönderi">
                 <div class="post-overlay">❤️ 1.412  💬 84</div>
             </div>
+            <!-- Orta Post -->
             <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1549877452-9c387954fbc2?q=80&w=600&auto=format&fit=cover" alt="Galata">
+                <img src="ortaa.jpg" alt="Orta Gönderi">
                 <div class="post-overlay">❤️ 2.105  💬 112</div>
             </div>
+            <!-- Sağ Post -->
             <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=600&auto=format&fit=cover" alt="Sunset">
+                <img src="sagg.jpg" alt="Sağ Gönderi">
                 <div class="post-overlay">❤️ 1.890  💬 95</div>
             </div>
         </div>
