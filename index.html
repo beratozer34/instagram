@@ -6,24 +6,26 @@
     <title>Instagram</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #262626; flex-direction: column; }
+        body { background-color: #fafafa; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #262626; padding: 20px; }
         
-        /* --- GİRİŞ EKRANI (LOGIN) --- */
-        .login-container { width: 350px; background: white; border: 1px solid #dbdbdb; padding: 40px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        /* --- GİRİŞ PANELİ (LOGIN) --- */
+        .login-wrapper { display: flex; flex-direction: column; width: 350px; }
+        .login-container { background: white; border: 1px solid #dbdbdb; padding: 30px 40px; text-align: center; border-radius: 1px; width: 100%; }
         
-        /* CSS ile Kırılmayan Gerçekçi Yazı Logosu */
-        .insta-text-logo { font-family: 'Style Script', 'Georgia', cursive, sans-serif; font-size: 45px; font-weight: 500; margin-bottom: 30px; font-style: italic; letter-spacing: 1px; color: #262626; }
+        /* CSS ile Kırılmayan Yazı Logosu */
+        .insta-text-logo { font-family: 'Georgia', 'Times New Roman', serif; font-size: 38px; font-weight: 500; margin: 22px 0 35px 0; font-style: italic; color: #262626; }
         
-        form { width: 100%; display: flex; flex-direction: column; gap: 6px; }
-        .input-box { width: 100%; padding: 10px 8px; background: #fafafa; border: 1px solid #dbdbdb; border-radius: 3px; font-size: 12px; outline: none; }
+        /* Form Elemanları Garanti Altında */
+        .login-form { display: flex; flex-direction: column; width: 100%; }
+        .input-wrapper { position: relative; margin-bottom: 6px; width: 100%; }
+        .input-box { width: 100%; padding: 10px 8px; background: #fafafa; border: 1px solid #dbdbdb; border-radius: 3px; font-size: 12px; outline: none; color: #262626; }
         .input-box:focus { border-color: #a8a8a8; }
-        .login-btn { width: 100%; background-color: #0095f6; border: none; color: white; padding: 7px 0; border-radius: 4px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 8px; }
-        .error-message { color: #ed4956; font-size: 14px; margin-top: 15px; display: none; font-weight: 500; text-align: center; width: 100%; }
-
-        /* --- PROFİL EKRANI (DASHBOARD) --- */
-        .profile-container { display: none; width: 100%; max-width: 935px; margin: 0 auto; padding: 30px 20px; pointer-events: none; /* 🚫 Ekran tamamen kilitli */ user-select: none; }
         
-        /* Üst Profil Bilgisi */
+        .login-btn { width: 100%; background-color: #0095f6; border: none; color: white; padding: 7px 0; border-radius: 4px; font-weight: bold; font-size: 14px; cursor: pointer; margin: 8px 0 20px 0; }
+        .error-message { color: #ed4956; font-size: 14px; margin-top: 10px; font-weight: 500; text-align: center; display: none; }
+
+        /* --- PROFİL PANELİ (DASHBOARD) --- */
+        .profile-container { display: none; width: 100%; max-width: 935px; margin: 0 auto; padding: 30px 20px; pointer-events: none; user-select: none; }
         .profile-header { display: flex; align-items: center; margin-bottom: 44px; border-bottom: 1px solid #dbdbdb; padding-bottom: 44px; }
         .pfp-wrapper { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin-right: 100px; border: 1px solid #dbdbdb; flex-shrink: 0; }
         .pfp-wrapper img { width: 100%; height: 100%; object-fit: cover; }
@@ -35,14 +37,12 @@
         .bio { font-size: 16px; font-weight: 600; line-height: 1.5; }
         .bio span { font-weight: 400; color: #8e8e8e; display: block; margin-top: 5px; }
 
-        /* Post Izgarası (Grid) */
         .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; width: 100%; }
         .post-card { position: relative; aspect-ratio: 1 / 1; background-color: #efefef; overflow: hidden; border: 1px solid #dbdbdb; }
         .post-card img { width: 100%; height: 100%; object-fit: cover; }
-        .post-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 18px; opacity: 0; transition: opacity 0.2s; }
+        .post-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; font-size: 18px; opacity: 0; }
         .post-card:hover .post-overlay { opacity: 1; }
 
-        /* Mobil Duyarlılık */
         @media (max-width: 735px) {
             .pfp-wrapper { margin-right: 30px; width: 80px; height: 80px; }
             .profile-header { margin-bottom: 20px; padding-bottom: 20px; }
@@ -54,16 +54,22 @@
 </head>
 <body>
 
-    <div id="loginBox" class="login-container">
-        <div class="insta-text-logo">Instagram</div>
-        
-        <form id="instaLoginForm" onsubmit="handleLogin(event)">
-            <input type="text" id="username" class="input-box" placeholder="Telefon numarası, kullanıcı adı veya e-posta" required autocomplete="off">
-            <input type="password" id="password" class="input-box" placeholder="Şifre" required>
-            <button type="submit" class="login-btn">Giriş Yap</button>
-        </form>
-        
-        <div id="errorMsg" class="error-message">Girdiğin kullanıcı adı veya şifre hatalı. Lütfen tekrar dene.</div>
+    <div id="loginWrapper" class="login-wrapper">
+        <div class="login-container">
+            <div class="insta-text-logo">Instagram</div>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="input-wrapper">
+                    <input type="text" id="username" class="input-box" placeholder="Telefon numarası, kullanıcı adı veya e-posta" required autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <input type="password" id="password" class="input-box" placeholder="Şifre" required>
+                </div>
+                <button type="submit" class="login-btn">Giriş Yap</button>
+            </form>
+            
+            <div id="errorMsg" class="error-message">Girdiğin kullanıcı adı veya şifre hatalı. Lütfen tekrar dene.</div>
+        </div>
     </div>
 
     <div id="profileBox" class="profile-container">
@@ -110,9 +116,8 @@
             var passInp = document.getElementById('password').value;
             var errorDiv = document.getElementById('errorMsg');
             
-            // Kullanıcı adı ve şifre kontrol mekanizması
             if (userInp === 'beratozer' && passInp === 'babanız') {
-                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('loginWrapper').style.display = 'none';
                 document.body.style.backgroundColor = '#ffffff';
                 document.body.style.alignItems = 'flex-start';
                 
